@@ -1,6 +1,14 @@
 # :sushi:SALMon: Suite for Acoustic Language Model evaluation :sushi:
 This repostory contatins the offical code both for evaluting your model using SALMon, and for reproducing SALMon.
 
+<p align="center">
+<a href='https://arxiv.org'><img src='https://img.shields.io/badge/ArXiv-PDF-red'></a>
+   <a href='https://pages.cs.huji.ac.il/adiyoss-lab/salmon/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> 
+
+</p>
+
+![](imgs/salmon_web.png)
+
 ## Run SALMon
 ### Installation
 Clone the repository
