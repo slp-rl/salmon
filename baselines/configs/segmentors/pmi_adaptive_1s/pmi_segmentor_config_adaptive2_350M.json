@@ -1,0 +1,28 @@
+{
+    "sentencer": {
+        "type" : "length",
+        "length" : 1,
+        "min_length": 0.25,
+        "drop_last": false
+    },
+    "scorer": {
+        "type" : "speech_pmi",
+        "model_type" : "TWIST-350M",
+        "tokenizer": {
+            "dense_model_name": "mhubert-base-25hz",
+            "quantizer_model_name" : "kmeans",
+            "encoder_vocab_size": 500,
+            "deduplicate": true,
+            "need_f0": false
+        }
+    },
+    "sselector":{
+        "type": "adaptive",
+        "base_segments": 4,
+        "len_offset": 20,
+        "sentences_for_segment": 10,
+        "descending": false
+    },
+    "default_sample_rate": 16000,
+    "type":"speech_pmi"
+}

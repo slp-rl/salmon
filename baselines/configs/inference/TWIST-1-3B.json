@@ -1,0 +1,12 @@
+{
+    "model_name" : "TWIST-1.3B",
+    "model_type": "slm",
+    "mean_nll": true,
+    "tokenizer": {
+        "dense_model_name": "mhubert-base-25hz",
+        "quantizer_model_name" : "kmeans",
+        "encoder_vocab_size": 500,
+        "deduplicate": true,
+        "need_f0": false
+    }
+}

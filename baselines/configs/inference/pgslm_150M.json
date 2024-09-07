@@ -1,0 +1,18 @@
+{
+    "model_name" : "PGSLM-500-MY-BINS",
+    "model_type" : "pgslm",
+    "data_config": "/cs/labs/oabend/avishai.elma/pgslm_data_my_bins/data_config.json",
+    "mean_nll": true,
+    "tokenizer": {
+        "dense_model_name": "mhubert-base-25hz",
+        "quantizer_model_name" : "kmeans",
+        "encoder_vocab_size": 500,
+        "deduplicate": true,
+        "need_f0": true,
+        "f0_func": "parselmouth",
+        "log_f0":true,
+        "mean_f0": false,
+        "scale_f0": false,
+        "f0_bins_path": "/cs/labs/oabend/avishai.elma/pgslm_data_my_bins/f0_bins.pt"
+    }
+}

@@ -1,0 +1,6 @@
+{
+    "num_segments":15,
+    "default_sample_rate": 16000,
+    "type":"next_frame",
+    "model_ckpt": "/cs/labs/oabend/avishai.elma/src/speech_lm/UnsupSeg/pretrained_models/buckeye+_pretrained.ckpt"
+}

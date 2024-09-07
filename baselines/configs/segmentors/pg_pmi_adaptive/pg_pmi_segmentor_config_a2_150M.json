@@ -1,0 +1,34 @@
+{
+    "sentencer": {
+        "type" : "length",
+        "length" : 0.5,
+        "min_length": 0.25,
+        "drop_last": false
+    },
+    "scorer": {
+        "type" : "pgslm_pmi",
+        "model_type" : "PGSLM-150M-V1",
+        "data_config": "/cs/labs/oabend/avishai.elma/pgslm_data/data_config.json",
+        "tokenizer": {
+            "dense_model_name": "mhubert-base-25hz",
+            "quantizer_model_name" : "kmeans",
+            "encoder_vocab_size": 500,
+            "deduplicate": true,
+            "need_f0": true,
+            "f0_func": "parselmouth",
+            "log_f0":true,
+            "mean_f0": true,
+            "scale_f0": false,
+            "f0_bins_path": "/cs/labs/oabend/avishai.elma/pgslm_data/f0_bins.pt"
+        }
+    },
+    "sselector":{
+        "type": "adaptive",
+        "base_segments": 4,
+        "len_offset": 20,
+        "sentences_for_segment": 10,
+        "descending": false
+    },
+    "default_sample_rate": 16000,
+    "type":"speech_pmi"
+}

@@ -1,0 +1,15 @@
+{
+    "sentencer": {
+        "type" : "length",
+        "length" : 0.5,
+        "min_length": 0.25,
+        "drop_last": false
+    },
+    "sselector":{
+        "type": "constant",
+        "num_segments":10,
+        "descending": false
+    },
+    "default_sample_rate": 16000,
+    "type":"equal_length"
+}

@@ -1,0 +1,12 @@
+{
+    "dense_model_name": "mhubert-base-25hz",
+    "quantizer_model_name" : "kmeans",
+    "encoder_vocab_size": 500,
+    "deduplicate": false,
+    "need_f0": true,
+    "f0_func": "parselmouth",
+    "log_f0":true,
+    "mean_f0": true,
+    "scale_f0": false,
+    "f0_bins_path": "/cs/labs/oabend/avishai.elma/pgslm_data/f0_bins.pt"
+}

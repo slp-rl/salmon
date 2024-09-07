@@ -1,0 +1,9 @@
+# Mac related stuff
+.DS_Store
+.idea
+
+# data
+data
+outputs
+
+__pycache__/*.pyc
