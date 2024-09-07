@@ -7,7 +7,7 @@ This repostory contatins the offical code both for evaluting your model using SA
 
 </p>
 
-![](imgs/salmon_web.png)
+![https://pages.cs.huji.ac.il/adiyoss-lab/salmon/](imgs/salmon_web.png)
 
 ## Run SALMon
 ### Installation
@@ -26,6 +26,7 @@ unzip -q salmon_benchmark.zip
 ### Requirements
 The only dependencies you need are `torch` and `torchaudio`.
 
+### Evaluate Your Own Model
 All you need to do in order to run SALMon on your SLM is to inherit from `InferenceModel` and implement the abstract methods.
 ```python
 class InferenceModel(ABC):
@@ -48,6 +49,11 @@ After implementing both abstract methods and downloading the data, you can just 
 python salmon.py -c MODEL_CONFIG_PATH -s SALMON_FOLDER_PATH -p all
 ```
 
+An example for running TWIST as reported in the paper is:
+```bash
+python salmon.py -c MODEL_CONFIG_PATH -s SALMON_FOLDER_PATH -p all
+```
+
 ## Leaderbord
 
 |      Method      | Sentiment Consistency | Speaker Consistency | Gender Consistency | Background Consistency (In-Domain) | Background Consistency (Random) | Room Consistency | Sentiment Alignment | Background Alignment |
@@ -57,8 +63,8 @@ python salmon.py -c MODEL_CONFIG_PATH -s SALMON_FOLDER_PATH -p all
 |    LAST 1.3B     | 65.0 |        64.6         |        68.5        |                56.0                |              61.0               |       62.5       |        53.5         |         52.5         | 
 | Human Evaluation | 97.2 |        91.2         |        98.6        |                83.1                |              88.7               |       94.4       |        93.3         |         95.7         | 
 
-## Reproduce SALMon
-We provided you the code and data to reproduce SALMon. 
+## Generate SALMon Dataset
+We provide the code and data to reproduce SALMon, or alternitavely create more samles for futher evaluation or training! 
 For more instructions look at the [data_generation](data_generation) folder.
 
 
