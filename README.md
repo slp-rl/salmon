@@ -23,6 +23,7 @@ cd salmon
 # You may also choose to manually download the files from the link above if you prefer
 gdown 1RcXvwBZZvOaD8SjGuZn2VIhai7N0x0qL
 unzip -q salmon_benchmark.zip
+rm salmon_benchmark.zip  # cleanup
 ```
 
 ### Requirements
