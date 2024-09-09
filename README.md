@@ -27,7 +27,7 @@ rm salmon_benchmark.zip  # cleanup
 ```
 
 ### Requirements
-The only dependencies you need are `torch` and `torchaudio`. The code was developed and tested with `python==3.10`, but should work with other, recent versions. 
+The only dependencies you need for running the benchmark are `torch` and `torchaudio`, specific baselines may require additional installation (such as textlesslib). The code was developed and tested with `python==3.10`, but should work with other, recent versions. 
 
 ### Evaluate Your Own Model
 All you need to do in order to run SALMon on your SLM is to inherit from `InferenceModel` and implement the abstract methods.
@@ -52,9 +52,11 @@ After implementing both abstract methods and downloading the data, you can just 
 python salmon.py -c MODEL_CONFIG_PATH -s SALMON_FOLDER_PATH -p all
 ```
 
-An example for running TWIST as reported in the paper is:
+We provide an example for running a random model (without further requirements) or TWIST (with additional requirements) as reported in the paper:
 ```bash
-python salmon.py -c MODEL_CONFIG_PATH -s SALMON_FOLDER_PATH -p all
+python salmon.py baselines/configs/inference/random.json -s salmon_benchmark -p all  # Random dummy model
+python salmon.py baselines/configs/inference/TWIST-350M.json -s salmon_benchmark -p all  # TWIST 350M
+
 ```
 
 ## Leaderbord
