@@ -1,7 +1,3 @@
-import os
-os.environ["TEXTLESS_CHECKPOINT_ROOT"] = "/cs/labs/adiyoss/amitroth/ckpts"
-os.environ['HF_HOME'] = '/cs/labs/adiyoss/amitroth/cache_dir'
-os.environ['HF_DATASETS_CACHE'] = '/cs/labs/adiyoss/amitroth/cache_dir'
 import argparse
 from torch.utils.data import DataLoader, Dataset
 import torchaudio
@@ -14,7 +10,6 @@ from baselines.inference import InferenceModelFactory
 
 
 class SalmonDataset(Dataset):
-
     def __init__(self, salmon_path, part, load_audio=True):
         self.data = []
         self.salmon_path = Path(salmon_path)
@@ -43,7 +38,6 @@ class SalmonDataset(Dataset):
 
         self.data = [lst for lst in self.data if lst]
 
-
     def __len__(self):
         return len(self.data)
 
@@ -63,8 +57,8 @@ def collate_fn(batch):
 
 def main():
     parser = argparse.ArgumentParser(description='Run SALMon')
-    parser.add_argument("-s", "--salmon_path", type=str, help="SALMon path")
-    parser.add_argument("-c", "--inference_model_config", type=str, required=True, help="inference model config")
+    parser.add_argument("-s", "--salmon_path", type=str, help="Path to the downloaded SALMon dataset")
+    parser.add_argument("-c", "--inference_model_config", type=str, required=True, help="inference model config json")
     parser.add_argument("-p", "--parts", type=str, nargs="+", default=["all"], help="parts")
     parser.add_argument("-b", "--batch_size", type=int, default=1, help="batch size")
 
@@ -81,22 +75,21 @@ def main():
         inference_model = inference_model.to("cuda")
 
     if args.parts[0] == "all":
-
         args.parts = [
-            # "bg_alignment/before", 0.515
-            "bg_consistency/in_domain",
-            "bg_consistency/random",
-            "emotion_alignment_v2",
-            "emotion_consistency",
-            "rir_consistency",
-            "speaker_consistency/random",
-            "speaker_consistency/gender"
+            'bg_alignment/before',
+            'bg_all_consistency/',
+            'bg_domain_consistency/',
+            'gender_consistency/',
+            'rir_consistency/',
+            'sentiment_alignment/',
+            'sentiment_consistency/',
+            'speaker_consistency/',
         ]
 
     print(f"Calculating {len(args.parts)} parts of SALMon for {inference_model} model")
 
     for part in args.parts:
-        dataset = SalmonDataset(salmon_path, part, load_audio=False)
+        dataset = SalmonDataset(salmon_path, part, load_audio=True)
         assert len(dataset) > 0, f"no samples found for {part}"
         dataloader = DataLoader(dataset, batch_size=args.batch_size, collate_fn=collate_fn)
 

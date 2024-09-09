@@ -14,8 +14,8 @@ from utils.force_aligner import get_device, prepare_data, Tokenizer, ForceAligne
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 sys.path.append(os.path.dirname(SCRIPT_DIR))
 
-class BackgroundDataset:
 
+class BackgroundDataset:
     ALLOWED_CLASSES = [
         "Drill",
         "Gunshot, gunfire",
@@ -87,16 +87,14 @@ class BackgroundDataset:
 
 
 class LJSpeechDataset:
-
     """
         this implementation works with a subset of LJSpeech dataset, all recordings in the specified folder
     """
-
     def __init__(self, path):
         self.path =Path(path)
         self.wavs = list(self.path.glob("*.wav"))
 
-    def get_audio_path(self, max_length = 128000):
+    def get_audio_path(self, max_length=128000):
         # maximum length of 8 seconds
         while True:
             c = random.choice(self.wavs)
@@ -105,7 +103,6 @@ class LJSpeechDataset:
 
 
 class RirDataset:
-
     def __init__(self, path):
         self.path = Path(path)
 
@@ -117,10 +114,8 @@ class RirDataset:
 
 
 class VCTKDataset:
-    # SPEAKERS_BLACKLIST = [270,280, 312, 230, 5, 292, 343, 335, 233, 274, 265, 227, 253, 307]
     SPEAKERS_BLACKLIST = [270]
-
-    COMMON_TEXTS = range(1,24)
+    COMMON_TEXTS = range(1, 24)
 
     def __init__(self, path, metadata_path=None, device="cuda:0"):
         self.path = Path(path)
@@ -271,7 +266,6 @@ class ExpressoDataset:
 
 
 class TextDataset:
-
     def __init__(self, txt_path):
         self.path = txt_path
 
@@ -295,5 +289,3 @@ class TextDataset:
     def sample_list_of_texts(self, n):
         assert n <= self.len
         return random.sample(self.lines, n)
-
-

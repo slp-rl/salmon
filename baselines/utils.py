@@ -43,8 +43,7 @@ def get_gslm_speech_encoder(dense_model_name, quantizer_model_name, vocab_size,
         need_f0=need_f0,
         f0_normalizer=f0_normalizer,
         f0_quantizer=f0_quantizer
-    ) #TODO add         f0_func=f0_func
-
+    )
 
 
 def get_audio_files_from_manifest(manifest_path: str) -> Tuple[str, List[str], List[int]]:
@@ -212,7 +211,6 @@ def build_lm(model_type, library, data_config=None, base_path='./'):
         return build_speech_lm(model_type, base_path=base_path)
     else:
         raise ValueError(f"Library {library} not supported")
-
 
 
 def remove_spaces_and_punctuation(text):

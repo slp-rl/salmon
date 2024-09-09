@@ -7,9 +7,7 @@ import sys
 import typing as tp
 
 
-
 class Audio:
-
     GENERAL_SAMPLING_RATE = 16000
 
     def __init__(self, path=None):
@@ -32,7 +30,6 @@ class Audio:
 
     def write_audio(self, out_path, normalize=True):
         assert self.data.dtype.is_floating_point, "wav is not floating point"
-        # assert self.data.isfinite().all()
         if not self.data.isfinite().all():
             print("Warning: audio is not finite")
         if normalize:
@@ -43,7 +40,6 @@ class Audio:
         a = Audio()
         a.data = torch.nn.functional.pad(self.data, (0, n - len(self)), mode='constant', value=0)
         return a
-
 
     def __add__(self, other):
         """
@@ -218,8 +214,6 @@ class Audio:
 
         return mixed_signals
 
-
-
     @staticmethod
     def normalize_loudness(wav: torch.Tensor, sample_rate: int, loudness_headroom_db: float = 14,
                            loudness_compressor: bool = False, energy_floor: float = 2e-3):
@@ -263,34 +257,3 @@ if __name__ == '__main__':
 
     out2 = bg / (5 * bg)
     out2.write_audio("output2.wav")
-
-
-
-
-
-# def concat_audio(data_1, data_2):
-#     """
-#         audio should be in same sampling rates
-#     """
-#     combined_audio = np.concatenate((data_1, data_2))
-#     return combined_audio
-#
-#
-# def resample(y, orig_sr, target_sr):
-#     return librosa.resample(y=y, orig_sr=orig_sr, target_sr=target_sr)
-#
-#
-# def load_audio(path):
-#     data, sr = sf.read(path)
-#     return data, sr
-#
-#
-# def write_audio(path, data, sr):
-#     sf.write(file=path, data=data, samplerate=sr)
-#
-#
-# def normalize_audio(data):
-#     peak_normalized_audio = pyln.normalize.peak(data, -1.0)
-#     return peak_normalized_audio
-
-

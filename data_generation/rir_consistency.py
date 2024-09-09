@@ -1,4 +1,3 @@
-
 import numpy as np
 from scipy.io import wavfile
 from scipy.signal import fftconvolve
@@ -21,7 +20,6 @@ def simulate_rir(signal: Audio, rir: Audio, alpha=0.2):
     conv = torch.tensor(np.convolve(signal.data, rir.data, mode='full'), dtype=torch.float64)
     blended = alpha * conv[:len(signal)] + (1 - alpha) * signal.data
     return Audio.audio_from_wav(torch.tensor(blended, dtype=torch.float64), sr=16000)[:len(signal)]
-
 
 
 def rir_consistency(args):
@@ -75,13 +73,12 @@ def get_parser():
     parser.add_argument('--n_options', default=2, type=int, help='Number of options in each sample including the true')
     parser.add_argument('--seed', default=43, type=int, help='random seed, use -1 for non-determinism')
     parser.add_argument('--normalize', default=False, type=bool, help='normalize final audio')
-
     return parser
+
 
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
-
     args.output_dir = Path(args.output_dir)
 
     os.makedirs(Path(args.output_dir), exist_ok=True)

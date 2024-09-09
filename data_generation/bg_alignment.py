@@ -28,9 +28,6 @@ def bg_alignment(args):
 
     ]
     background_dataset = BackgroundDataset()
-
-    # assert args.n_samples <= len(background_dataset.get_classes())
-
     bg_classes = random.choices(background_dataset.get_classes(), k=args.n_samples)
 
     metadata = list()
@@ -61,12 +58,10 @@ def generate_sample(background_dataset, bg_class, speaker, index, snr, args):
     # generate speech
     text_dataset = TextDataset(f"/cs/labs/adiyoss/amitroth/slm-benchmark/txt/background/{bg_class}.txt")
     text = text_dataset.get_random_text()
-    # speech_audio = fastspeech.tts(text)
     speech_audio = generate_speech(out_path="wav",
                                    text=text,
                                    speaker=speaker['speaker'],
                                    style="neutral")
-    # print(f"{bg_class} - {text} - {snr}")
 
     # sample background noises
     negative_classes = list(background_dataset.get_classes())
@@ -95,7 +90,6 @@ def generate_sample(background_dataset, bg_class, speaker, index, snr, args):
 
         before_out_audio.write_audio(args.output_dir / f"before/sample_{index}_{i}.wav", normalize=args.normalize)
         after_out_audio.write_audio(args.output_dir / f"after/sample_{index}_{i}.wav", normalize=args.normalize)
-
 
     return text, bg_classes, bg_paths
 
@@ -131,7 +125,3 @@ if __name__ == '__main__':
 
     print(f"creating benchmark in {args.output_dir}")
     bg_alignment(args)
-
-"""
-/cs/labs/adiyoss/amitroth/anaconda3/bin/conda
-"""

@@ -27,7 +27,6 @@ PGSLM_INPUT_KEYS = (SRC_TOKENS, DUR_SRC, F0_SRC, MASK, F0_MASK, DUR_MASK, TARGET
 
 
 class InferenceModel(ABC):
-
     @abstractmethod
     def log_likelihood(self, wavs: List[torch.Tensor]) -> torch.Tensor:
         ...
@@ -38,7 +37,6 @@ class InferenceModel(ABC):
 
 
 class InferenceModelFactory:
-
     @staticmethod
     def get_model(config: Mapping, base_path="./") -> InferenceModel:
         if config["model_type"] == "pgslm":
@@ -52,7 +50,6 @@ class InferenceModelFactory:
 
 
 class SLMInferenceModel(InferenceModel):
-
     def __init__(self, config, base_path="./"):
         tokenizer_config = config['tokenizer']
         self.tokenizer = SpeechTokenizer(tokenizer_config)
@@ -98,7 +95,6 @@ class SLMInferenceModel(InferenceModel):
 
 
 class PGSLMInferenceModel(InferenceModel):
-
     def __init__(self, config, base_path="/cs/labs/oabend/avishai.elma/models/pgslm_models"):
         tokenizer_config = config["tokenizer"]
         self.tokenizer = PGSLMSpeechTokenizer(tokenizer_config)
@@ -119,7 +115,6 @@ class PGSLMInferenceModel(InferenceModel):
         self.use_units = config.get("use_units", True)
         self.max_token_duration = self.task.cfg.max_token_duration
         self.model_name = config["model_name"]
-
 
     def _shift_data(self, tokens: List[Dict[str, torch.Tensor]]) -> List[Dict[str, torch.Tensor]]:
         """
@@ -207,7 +202,6 @@ class PGSLMInferenceModel(InferenceModel):
 
 
 class NaiveInferenceModel(InferenceModel):
-
     def __init__(self):
         self.model_name = "ASR(large)+LM"
         self.whisper = whisper.load_model("large", download_root="/cs/labs/adiyoss/amitroth/ckpts/whisper")
@@ -217,7 +211,6 @@ class NaiveInferenceModel(InferenceModel):
         self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
         self.llama.to(device=self.device)
 
-
     def log_likelihood(self, wavs: List[torch.Tensor]) -> torch.Tensor:
         # to support batches
         losses = []
@@ -225,9 +218,7 @@ class NaiveInferenceModel(InferenceModel):
             for wav_path in wavs:
                 text = self.whisper.transcribe(wav_path)
                 text = remove_spaces_and_punctuation(text['text'])
-                # print(f"whisper text: {text}")
                 text_tokens = self.tokenizer(text, return_tensors="pt").to(device=self.device)
-                # print(f"tokens {text_tokens}")
 
                 logits = self.llama(**text_tokens).logits
                 shifted_logits = logits[..., :-1, :]
@@ -238,8 +229,6 @@ class NaiveInferenceModel(InferenceModel):
                 l = -nll(shifted_logits, shifted_x, mask, True)
                 losses.append(l)
 
-            # print(losses)
-            # print("-"*50)
             return torch.tensor(losses, device=self.device)
 
     def to(self, device):

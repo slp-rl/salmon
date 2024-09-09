@@ -36,7 +36,6 @@ def emotion_consistency(args):
         json.dump(metadata, f)
 
 
-
 def generate_sample(dataset, speaker, emotions, text_id, index, args):
     """
     Generate a sample for the emotion consistency benchmark
@@ -55,8 +54,8 @@ def generate_sample(dataset, speaker, emotions, text_id, index, args):
         negative_cut = (negative_audio_data[2][cut_index][1] + negative_audio_data[2][cut_index+1][0]) / 2  # start of second part
         negative_audio = positive_audio[:int(positive_cut * Audio.GENERAL_SAMPLING_RATE)] / Audio(negative_audio_data[1])[int(negative_cut * Audio.GENERAL_SAMPLING_RATE):]
         negative_audio.write_audio(args.output_dir / f"sample_{index}_{i + 1}.wav", normalize=args.normalize)
-
     return text
+
 
 def get_parser():
     parser = argparse.ArgumentParser()
@@ -68,9 +67,8 @@ def get_parser():
                         help='where to split the recording')
     parser.add_argument('--seed', default=43, type=int, help='random seed, use -1 for non-determinism')
     parser.add_argument('--normalize', default=False, type=bool, help='normalize final audio')
-
-
     return parser
+
 
 if __name__ == '__main__':
     parser = get_parser()

@@ -23,7 +23,6 @@ def speaker_consistency(args):
 
     speakers_per_text = {t: random.sample(vctk.get_speakers(text_id=t), 3 * args.n_options * samples_per_text) for t in texts}
 
-
     for i in tqdm(range(args.n_samples)):
         text = texts[int(i / samples_per_text)]
         if args.gender:
@@ -52,7 +51,6 @@ def speaker_consistency(args):
 
     with open(args.output_dir / "metadata.json", "w") as f:
         json.dump(metadata, f)
-
 
 
 def generate_sample(dataset, text, speakers, index, args):
@@ -84,13 +82,12 @@ def get_parser():
     parser.add_argument('--gender', default=False, type=bool, help='set distractors to be from the opposite gender')
     parser.add_argument('--normalize', default=False, type=bool, help='normalize final audio')
 
-
     return parser
+
 
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
-
     args.output_dir = Path(args.output_dir)
 
     os.makedirs(Path(args.output_dir), exist_ok=True)

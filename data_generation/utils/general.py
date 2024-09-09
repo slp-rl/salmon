@@ -5,12 +5,10 @@ import re
 from pathlib import Path
 
 
-
 def seed_everything(seed: int, deterministic=False):
     random.seed(seed)
     os.environ['PYTHONHASHSEED'] = str(seed)
     np.random.seed(seed)
-
 
 
 def regex_rglob(path: Path, pattern: str):

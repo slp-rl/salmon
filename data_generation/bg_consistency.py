@@ -33,7 +33,6 @@ def bg_consistency(args):
         json.dump(metadata, f)
 
 
-
 def generate_sample(speech_path, dataset, index, snr, args):
     speech_audio = Audio(speech_path)
     bg_paths = dataset.sample(args.n_options, args.distract_method, speech_length=len(speech_audio))
@@ -85,10 +84,10 @@ def get_parser():
 
     return parser
 
+
 if __name__ == '__main__':
     parser = get_parser()
     args = parser.parse_args()
-
     args.output_dir = Path(args.output_dir)
 
     os.makedirs(Path(args.output_dir), exist_ok=True)

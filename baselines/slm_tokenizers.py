@@ -12,7 +12,6 @@ PGSLM_TOKEN_KEYS = (UNITS, DURATIONS, F0)
 
 
 class SpeechTokenizer(torch.nn.Module):
-
     def __init__(self, config: Mapping) -> None:
         """
         init method for SpeechTokenizer
@@ -95,5 +94,3 @@ class PGSLMSpeechTokenizer(torch.nn.Module):
         """
         self.encoder.to(device)
         return self
-
-
