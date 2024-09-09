@@ -27,7 +27,7 @@ rm salmon_benchmark.zip  # cleanup
 ```
 
 ### Requirements
-The only dependencies you need are `torch` and `torchaudio`.
+The only dependencies you need are `torch` and `torchaudio`. The code was developed and tested with `python==3.10`, but should work with other, recent versions. 
 
 ### Evaluate Your Own Model
 All you need to do in order to run SALMon on your SLM is to inherit from `InferenceModel` and implement the abstract methods.
