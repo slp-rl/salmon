@@ -1,6 +1,3 @@
-import sys
-sys.path.append('../../../amitroth/slm-benchmark/baselines/textlesslib/')
-
 import argparse
 from torch.utils.data import DataLoader, Dataset
 import torchaudio
