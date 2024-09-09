@@ -19,6 +19,8 @@ Our benchmark is published in [google drive](https://drive.google.com/drive/fold
 
 ```bash
 cd salmon
+# This might require installing gdown, see - https://github.com/wkentaro/gdown?tab=readme-ov-file#installation
+# You may also choose to manually download the files from the link above if you prefer
 gdown 1RcXvwBZZvOaD8SjGuZn2VIhai7N0x0qL
 unzip -q salmon_benchmark.zip
 ```
