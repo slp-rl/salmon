@@ -4,8 +4,6 @@ import zipfile
 import wget
 import torch
 from transformers import AutoModelForCausalLM, AutoConfig
-from textless.data.speech_encoder import SpeechEncoder
-from textless.data.f0_preprocess import PromptNormalize, F0BinQuantizer
 from accelerate import init_empty_weights, load_checkpoint_and_dispatch, infer_auto_device_map
 from fairseq import checkpoint_utils
 from torch import FloatTensor, LongTensor
@@ -35,6 +33,9 @@ def get_gslm_speech_encoder(dense_model_name, quantizer_model_name, vocab_size,
     :param deduplicate: deduplicate
     :param need_f0: need f0
     """
+    # We import inside the function to avoid many requirements for baseline users
+    from textless.data.speech_encoder import SpeechEncoder
+
     return SpeechEncoder.by_name(
         dense_model_name=dense_model_name,
         quantizer_model_name=quantizer_model_name,
@@ -123,6 +124,9 @@ def build_pgslm_speech_lm(model_type, data_config, base_path='/cs/labs/adiyoss/a
 
 
 def get_pgslm_speech_encoder(config):
+    # We import inside the function to avoid many requirements for baseline users
+    from textless.data.f0_preprocess import PromptNormalize, F0BinQuantizer
+
     mean, scale, log = config['mean_f0'], config['scale_f0'], config['log_f0']
     f0_normalizer = None
     if mean or scale or log:

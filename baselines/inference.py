@@ -45,6 +45,8 @@ class InferenceModelFactory:
             return SLMInferenceModel(config, base_path=base_path)
         if config["model_type"] == "naive":
             return NaiveInferenceModel()
+        if config["model_type"] == "random":
+            return RandomInferenceModel()
 
         raise ValueError(f"Model type {config['model_type']} not supported")
 
@@ -230,6 +232,25 @@ class NaiveInferenceModel(InferenceModel):
                 losses.append(l)
 
             return torch.tensor(losses, device=self.device)
+
+    def to(self, device):
+        return self
+
+    def __str__(self):
+        return f"{self.model_name}"
+
+
+class RandomInferenceModel(InferenceModel):
+    """
+    This model is a dummy model which returns random likelihood so that one can test the benchmark code without further
+    dependencies
+    """
+    def __init__(self):
+        self.model_name = "Random_Dummy"
+        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    def log_likelihood(self, wavs: List[torch.Tensor]) -> torch.Tensor:
+        return torch.rand(len(wavs), device=self.device)
 
     def to(self, device):
         return self
