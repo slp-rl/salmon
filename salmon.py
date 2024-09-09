@@ -3,7 +3,7 @@ from torch.utils.data import DataLoader, Dataset
 import torchaudio
 import json
 import torch
-from tqdm import tqdm
+# from tqdm import tqdm
 from pathlib import Path
 
 from baselines.inference import InferenceModelFactory
@@ -96,7 +96,7 @@ def main():
         res_list = []
 
         with torch.no_grad():
-            for sample_files in tqdm(dataloader):
+            for sample_files in dataloader:
                 pos_sample, neg_sample = sample_files
                 pos_likelihood = inference_model.log_likelihood(pos_sample)
                 neg_likelihood = inference_model.log_likelihood(neg_sample)

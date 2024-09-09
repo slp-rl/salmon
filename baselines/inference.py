@@ -1,16 +1,9 @@
 from abc import ABC, abstractmethod
-from fairseq.data.codedataset import Paddings, Shifts
 import torch
 from typing import Dict, List, Mapping
 
-from .slm_tokenizers import PGSLMSpeechTokenizer, UNITS, DURATIONS, F0, SpeechTokenizer
-from .utils import build_pgslm_speech_lm, build_speech_lm, nll, probability, remove_spaces_and_punctuation
 from torch.nn.utils.rnn import pad_sequence
 
-from transformers import AutoModelForCausalLM, AutoTokenizer
-
-
-import whisper
 
 SRC_TOKENS = "src_tokens"
 DUR_SRC = "dur_src"
@@ -53,6 +46,9 @@ class InferenceModelFactory:
 
 class SLMInferenceModel(InferenceModel):
     def __init__(self, config, base_path="./"):
+        from .slm_tokenizers import SpeechTokenizer
+        from .utils import build_speech_lm
+
         tokenizer_config = config['tokenizer']
         self.tokenizer = SpeechTokenizer(tokenizer_config)
         self.speech_lm = build_speech_lm(config["model_name"], base_path)
@@ -62,6 +58,7 @@ class SLMInferenceModel(InferenceModel):
         self.model_name = config["model_name"]
 
     def log_likelihood(self, wavs: List[torch.Tensor]) -> torch.Tensor:
+        from .utils import nll
         self.tokenizer.eval()
         sentece_tokens = self.tokenizer(wavs, self.offset)
         x = pad_sequence(sentece_tokens, batch_first=True, padding_value=self.padding_value)
@@ -75,6 +72,7 @@ class SLMInferenceModel(InferenceModel):
         return -nll(shifted_logits, shifted_x, mask, self.mean_nll)
 
     def probability(self, wavs: List[torch.Tensor]) -> torch.Tensor:
+        from .utils import probability
         self.tokenizer.eval()
         sentece_tokens = self.tokenizer(wavs, self.offset)
         x = pad_sequence(sentece_tokens, batch_first=True, padding_value=self.padding_value)
@@ -98,6 +96,10 @@ class SLMInferenceModel(InferenceModel):
 
 class PGSLMInferenceModel(InferenceModel):
     def __init__(self, config, base_path="/cs/labs/oabend/avishai.elma/models/pgslm_models"):
+        from fairseq.data.codedataset import Paddings, Shifts
+        from .slm_tokenizers import PGSLMSpeechTokenizer
+        from .utils import build_pgslm_speech_lm
+
         tokenizer_config = config["tokenizer"]
         self.tokenizer = PGSLMSpeechTokenizer(tokenizer_config)
         self.mean_nll = config.get("mean_nll", False)
@@ -122,6 +124,8 @@ class PGSLMInferenceModel(InferenceModel):
         """
         shift the tokens
         """
+        from .slm_tokenizers import UNITS, DURATIONS, F0
+
         feats = {key: [] for key in PGSLM_INPUT_KEYS}
         for token in tokens:
             code, dur, f0 = token[UNITS].long().to(self.device), token[DURATIONS].to(self.device), token[F0].to(
@@ -151,6 +155,8 @@ class PGSLMInferenceModel(InferenceModel):
         return feats
 
     def log_likelihood(self, wavs: List[torch.Tensor]) -> torch.Tensor:
+        from .utils import nll
+
         wavs = [xi.squeeze(0) for xi in wavs]
         tokens = self.tokenizer(wavs, -1)
         feats = self._shift_data(tokens)
@@ -205,6 +211,9 @@ class PGSLMInferenceModel(InferenceModel):
 
 class NaiveInferenceModel(InferenceModel):
     def __init__(self):
+        from transformers import AutoModelForCausalLM, AutoTokenizer
+        import whisper
+
         self.model_name = "ASR(large)+LM"
         self.whisper = whisper.load_model("large", download_root="/cs/labs/adiyoss/amitroth/ckpts/whisper")
         self.llama = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-2-7b-hf", device_map="auto")
@@ -214,6 +223,8 @@ class NaiveInferenceModel(InferenceModel):
         self.llama.to(device=self.device)
 
     def log_likelihood(self, wavs: List[torch.Tensor]) -> torch.Tensor:
+        from .utils import nll, remove_spaces_and_punctuation
+
         # to support batches
         losses = []
         with torch.no_grad():
