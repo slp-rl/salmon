@@ -2,10 +2,9 @@
 This repostory contatins the offical code both for evaluting your model using SALMon, and for reproducing SALMon.
 
 <p align="center">
-<a href='https://arxiv.org'><img src='https://img.shields.io/badge/ArXiv-PDF-red'></a>
-   <a href='https://pages.cs.huji.ac.il/adiyoss-lab/salmon/'><img src='https://img.shields.io/badge/Project-Page-Green'></a> 
-
+    🌐 <a href="https://pages.cs.huji.ac.il/adiyoss-lab/salmon/" target="_blank">Project</a> | 📃 <a href="https://arxiv.org/abs/" target="_blank">Paper</a> | 🤗 <a href="https://huggingface.co/datasets/slprl/SALMon" target="_blank">Dataset</a> | 💾 <a href="https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link" target="_blank">Dataset (Drive) </a><br>
 </p>
+
 
 ![https://pages.cs.huji.ac.il/adiyoss-lab/salmon/](imgs/salmon_web.png)
 
@@ -15,13 +14,13 @@ Clone the repository
 ```bash
 git clone https://github.com/slp-rl/salmon.git
 ```
-Our benchmark is published in [google drive](https://drive.google.com/drive/folders/1RztYzG0PeekaRV_KEuCX6Y6qT96XtUft?usp=share_link).
+Our benchmark is published in google drive - ([unzipped](https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link), [zipped](https://drive.google.com/file/d/11qXvKtrGDVSALWDVjLi7gDBd9SkDXy10/view?usp=share_link)). We also publish the dataset in 🤗[HuggingFace Datasets](https://huggingface.co/datasets/slprl/SALMon) - yet the integration with this code is not yet fully supported.
 
 ```bash
 cd salmon
 # This might require installing gdown, see - https://github.com/wkentaro/gdown?tab=readme-ov-file#installation
 # You may also choose to manually download the files from the link above if you prefer
-gdown 1RcXvwBZZvOaD8SjGuZn2VIhai7N0x0qL
+gdown 11qXvKtrGDVSALWDVjLi7gDBd9SkDXy10
 unzip -q salmon_benchmark.zip
 rm salmon_benchmark.zip  # cleanup
 ```
@@ -60,16 +59,17 @@ python salmon.py baselines/configs/inference/TWIST-350M.json -s salmon_benchmark
 ```
 
 ## Leaderbord
+We provide here a short version of the leaderboard for a live sortable version see the [project page](https://pages.cs.huji.ac.il/adiyoss-lab/salmon/) or Papers with code (soon!).
 
 |      Method      | Sentiment Consistency | Speaker Consistency | Gender Consistency | Background Consistency (In-Domain) | Background Consistency (Random) | Room Consistency | Sentiment Alignment | Background Alignment |
 |:----------------:|:---------------------:|:-------------------:|:------------------:|:----------------------------------:|:-------------------------------:|:----------------:|:-------------------:|:--------------------:|
 |     Twist 7B     |         61.5          |        71.0         |        70.0        |                55.0                |              60.5               |       62.0       |        51.5         |         54.0         | 
-|      pGSLM       |         40.5          |        82.5         |        88.5        |                57.5                |              66.0               |       53.5       |        55.5         |         53.0         | 
-|    LAST 1.3B     | 65.0 |        64.6         |        68.5        |                56.0                |              61.0               |       62.5       |        53.5         |         52.5         | 
-| Human Evaluation | 97.2 |        91.2         |        98.6        |                83.1                |              88.7               |       94.4       |        93.3         |         95.7         | 
+|      pGSLM       |         40.5          |        83.0         |        88.5        |                57.0                |              66.0               |       53.5       |        55.5         |         53.5         | 
+|    LAST 1.3B     | 65.0 |        64.5         |        68.5        |                56.0                |              61.0               |       62.5       |        53.5         |         53.0         | 
+| Human Evaluation | **<ins>97.2</ins>** |  **<ins>91.2</ins>**  |  **<ins>98.6</ins>**  |  **<ins>83.1</ins>**  |  **<ins>88.7</ins>** |  **<ins>94.4</ins>** |  **<ins>93.3</ins>** |  **<ins>95.7</ins>** | 
 
 ## Generate SALMon Dataset
-We provide the code and data to reproduce SALMon, or alternitavely create more samles for futher evaluation or training! 
+We provide the code and data to reproduce SALMon, or alternitavely create more samples for futher evaluation or training! 
 For more instructions look at the [data_generation](data_generation) folder.
 
 
