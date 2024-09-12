@@ -72,6 +72,8 @@ We provide here a short version of the leaderboard for a live sortable version s
 We provide the code and data to reproduce SALMon, or alternitavely create more samples for futher evaluation or training! 
 For more instructions look at the [data_generation](data_generation) folder.
 
+## License
+We license the SALMon dataset with [cc-by-nc 4.0](https://creativecommons.org/licenses/by-nc/4.0/) as this is the license of some of the datasets used.
 
 ## Citation
 
