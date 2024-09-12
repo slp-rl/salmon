@@ -2,7 +2,7 @@
 This repostory contatins the offical code both for evaluting your model using SALMon, and for reproducing SALMon.
 
 <p align="center">
-    🌐 <a href="https://pages.cs.huji.ac.il/adiyoss-lab/salmon/" target="_blank">Project</a> | 📃 <a href="https://arxiv.org/abs/" target="_blank">Paper</a> | 🤗 <a href="https://huggingface.co/datasets/slprl/SALMon" target="_blank">Dataset</a> | 💾 <a href="https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link" target="_blank">Dataset (Drive) </a><br>
+    🌐 <a href="https://pages.cs.huji.ac.il/adiyoss-lab/salmon/" target="_blank">Project</a> | 📃 <a href="https://arxiv.org/abs/2409.07437" target="_blank">Paper</a> | 🤗 <a href="https://huggingface.co/datasets/slprl/SALMon" target="_blank">Dataset</a> | 💾 <a href="https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link" target="_blank">Dataset (Drive) </a><br>
 </p>
 
 
@@ -76,7 +76,10 @@ For more instructions look at the [data_generation](data_generation) folder.
 ## Citation
 
 ```bibtex
-@article{
-    soon
-}
+@article{maimon2024salmon,
+          title={A Suite for Acoustic Language Model Evaluation},
+          author={Maimon, Gallil and Roth, Amit and Adi, Yossi},
+          journal={arXiv preprint arXiv:2409.07437},
+          year={2024}
+          }
 ```
