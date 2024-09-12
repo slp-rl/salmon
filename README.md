@@ -1,5 +1,5 @@
 # :sushi:SALMon: Suite for Acoustic Language Model evaluation :sushi:
-This repostory contatins the offical code both for evaluting your model using SALMon, and for reproducing SALMon.
+This repostory contatins the offical code both for evaluting your model using SALMon, and for reproducing SALMon - as described in the paper "[A Suite for Acoustic Language Model Evaluation](https://arxiv.org/abs/2409.07437)".
 
 <p align="center">
     🌐 <a href="https://pages.cs.huji.ac.il/adiyoss-lab/salmon/" target="_blank">Project</a> | 📃 <a href="https://arxiv.org/abs/2409.07437" target="_blank">Paper</a> | 🤗 <a href="https://huggingface.co/datasets/slprl/SALMon" target="_blank">Dataset</a> | 💾 <a href="https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link" target="_blank">Dataset (Drive) </a><br>
