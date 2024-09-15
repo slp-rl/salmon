@@ -76,7 +76,7 @@ def main():
 
     if args.parts[0] == "all":
         args.parts = [
-            'bg_alignment/before',
+            'bg_alignment/',
             'bg_all_consistency/',
             'bg_domain_consistency/',
             'gender_consistency/',
@@ -109,7 +109,7 @@ def main():
                 res_list.append(res)
 
         res_list = torch.cat(res_list)
-        print(f"SALMon [{part}]: {res_list.float().mean().cpu():.3f}")
+        print(f"SALMon - {part}: {res_list.float().mean().cpu():.4f}")
 
 
 if __name__ == "__main__":
