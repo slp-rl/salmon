@@ -15,7 +15,7 @@ Clone the repository
 ```bash
 git clone https://github.com/slp-rl/salmon.git
 ```
-Our benchmark is published in google drive - ([unzipped](https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link), [zipped](https://drive.google.com/file/d/11qXvKtrGDVSALWDVjLi7gDBd9SkDXy10/view?usp=share_link)). We also publish the dataset in 🤗[HuggingFace Datasets](https://huggingface.co/datasets/slprl/SALMon) - yet the integration with this code is not yet fully supported.
+Our benchmark is published in google drive - ([unzipped](https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link), [zipped](https://drive.google.com/file/d/11qXvKtrGDVSALWDVjLi7gDBd9SkDXy10/view?usp=share_link)). We also publish the dataset in 🤗[HuggingFace Datasets](https://huggingface.co/datasets/slprl/SALMon) and it will be automatically loaded if a dataset path won't be provided.
 
 ```bash
 cd salmon
