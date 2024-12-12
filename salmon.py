@@ -12,51 +12,39 @@ from baselines.inference import InferenceModelFactory
 class SalmonDataset(Dataset):
     def __init__(self, salmon_path, part, load_audio=True):
         self.data = []
+        self.salmon_path = Path(salmon_path)
         self.load_audio = load_audio
-        self.HF = salmon_path is None  # set Hugging Face flag if data path hasn't specified
+        dir_path = self.salmon_path / part
+        paths = list(dir_path.glob("*.wav"))
 
-        if self.HF:
-            print("Salmon path didnt specified, downloading from Hugging Face ...")
-            assert load_audio is True, "load_audio must be set to True when using Hugging Face"
+        max_sample_index = -1
+        for path in paths:
+            stem = str(path.stem)
+            parts = stem.split("_")
+            sample_index = int(parts[1])
+            if sample_index > max_sample_index:
+                max_sample_index = sample_index
 
-            from datasets import load_dataset
-            salmon = load_dataset('slprl/salmon', 'bg_alignment')
-            self.data = [[s['positive_audio']['array'], s['negative_audio']['array']] for s in salmon['train']]
 
-        else:
-            salmon_path = Path(salmon_path)
-            dir_path = salmon_path / part
-            paths = list(dir_path.glob("*.wav"))
+        self.data = [[] for _ in range(max_sample_index + 1)]
 
-            max_sample_index = -1
-            for path in paths:
-                stem = str(path.stem)
-                parts = stem.split("_")
-                sample_index = int(parts[1])
-                if sample_index > max_sample_index:
-                    max_sample_index = sample_index
+        for path in paths:
+            stem = str(path.stem)
+            parts = stem.split("_")
+            sample_index = int(parts[1])
+            self.data[sample_index].append(str(path))
 
-            self.data = [[] for _ in range(max_sample_index + 1)]
+        for sample_list in self.data:
+            sample_list.sort()
 
-            for path in paths:
-                stem = str(path.stem)
-                parts = stem.split("_")
-                sample_index = int(parts[1])
-                self.data[sample_index].append(str(path))
-
-            for sample_list in self.data:
-                sample_list.sort()
-
-            self.data = [lst for lst in self.data if lst]
+        self.data = [lst for lst in self.data if lst]
 
     def __len__(self):
         return len(self.data)
 
     def __getitem__(self, idx):
         sample_files = self.data[idx]
-        if self.HF:
-            return [torch.tensor(arr, dtype=torch.float32).unsqueeze(0) for arr in sample_files]
-        elif self.load_audio:
+        if self.load_audio:
             sample_audios = [torchaudio.load(sample_file) for sample_file in sample_files]
             return [s[0] for s in sample_audios]
         else:
@@ -70,8 +58,8 @@ def collate_fn(batch):
 
 def main():
     parser = argparse.ArgumentParser(description='Run SALMon')
+    parser.add_argument("-s", "--salmon_path", type=str, help="Path to the downloaded SALMon dataset")
     parser.add_argument("-c", "--inference_model_config", type=str, required=True, help="inference model config json")
-    parser.add_argument("-s", "--salmon_path", default=None, type=str, help="Path to the downloaded SALMon dataset, if not specified salmon will be downloaded from Hugging Face")
     parser.add_argument("-p", "--parts", type=str, nargs="+", default=["all"], help="parts")
     parser.add_argument("-b", "--batch_size", type=int, default=1, help="batch size")
 
