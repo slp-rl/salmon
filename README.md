@@ -1,6 +1,7 @@
 # :sushi:SALMon: Suite for Acoustic Language Model evaluation :sushi:
 This repostory contatins the offical code both for evaluting your model using SALMon, and for reproducing SALMon - as described in the paper "[A Suite for Acoustic Language Model Evaluation](https://arxiv.org/abs/2409.07437)".
 
+
 <p align="center">
     🌐 <a href="https://pages.cs.huji.ac.il/adiyoss-lab/salmon/" target="_blank">Project</a> | 📃 <a href="https://arxiv.org/abs/2409.07437" target="_blank">Paper</a> | 🤗 <a href="https://huggingface.co/datasets/slprl/SALMon" target="_blank">Dataset</a> | 💾 <a href="https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link" target="_blank">Dataset (Drive) </a><br>
 </p>
@@ -14,7 +15,7 @@ Clone the repository
 ```bash
 git clone https://github.com/slp-rl/salmon.git
 ```
-Our benchmark is published in google drive - ([unzipped](https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link), [zipped](https://drive.google.com/file/d/11qXvKtrGDVSALWDVjLi7gDBd9SkDXy10/view?usp=share_link)). We also publish the dataset in 🤗[HuggingFace Datasets](https://huggingface.co/datasets/slprl/SALMon) - yet the integration with this code is not yet fully supported.
+Our benchmark is published in google drive - ([unzipped](https://drive.google.com/drive/folders/1pVv6iMmP_VXH6Goxwnmpy-5h3jPAoJ0t?usp=share_link), [zipped](https://drive.google.com/file/d/11qXvKtrGDVSALWDVjLi7gDBd9SkDXy10/view?usp=share_link)). We also publish the dataset in 🤗[HuggingFace Datasets](https://huggingface.co/datasets/slprl/SALMon) and it will be automatically loaded if a dataset path won't be provided.
 
 ```bash
 cd salmon
