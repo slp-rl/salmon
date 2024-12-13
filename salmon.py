@@ -13,11 +13,11 @@ class SalmonDataset(Dataset):
     def __init__(self, salmon_path, part, load_audio=True):
         self.data = []
         self.load_audio = load_audio
-        self.HF = salmon_path is None  # set Hugging Face flag if data path hasn't specified
+        self.use_hugging_face = salmon_path is None  # set Hugging Face flag if data path hasn't specified
 
-        if self.HF:
-            print("Salmon path didnt specified, downloading from Hugging Face ...")
-            assert load_audio is True, "load_audio must be set to True when using Hugging Face"
+        if self.use_hugging_face:
+            print("Salmon path not specified, downloading dataset from Hugging Face ...")
+            assert load_audio is True, "load_audio must be True when using Hugging Face"
 
             from datasets import load_dataset
             salmon = load_dataset('slprl/salmon', part)
@@ -54,7 +54,7 @@ class SalmonDataset(Dataset):
 
     def __getitem__(self, idx):
         sample_files = self.data[idx]
-        if self.HF:
+        if self.use_hugging_face:
             return [torch.tensor(arr, dtype=torch.float32).unsqueeze(0) for arr in sample_files]
         elif self.load_audio:
             sample_audios = [torchaudio.load(sample_file) for sample_file in sample_files]
