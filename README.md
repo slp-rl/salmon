@@ -1,5 +1,5 @@
 # :sushi:SALMon: Suite for Acoustic Language Model evaluation :sushi:
-This repostory contatins the offical code both for evaluting your model using SALMon, and for generating SALMon data - as described in the paper "[A Suite for Acoustic Language Model Evaluation](https://arxiv.org/abs/2409.07437)" (ICASSP 2025).
+This repostory contatins the offical code both for evaluting your model using SALMon, and for generating SALMon data - as described in the paper "[A Suite for Acoustic Language Model Evaluation](https://arxiv.org/abs/2409.07437)" (ICASSP 2025 - Oral).
 
 
 <p align="center">
@@ -82,10 +82,15 @@ We license the SALMon dataset with [cc-by-nc 4.0](https://creativecommons.org/li
 ## Citation
 
 ```bibtex
-@article{maimon2024salmon,
-          title={A Suite for Acoustic Language Model Evaluation},
-          author={Maimon, Gallil and Roth, Amit and Adi, Yossi},
-          journal={arXiv preprint arXiv:2409.07437},
-          year={2024}
-          }
+@INPROCEEDINGS{maimon2025salmon,
+  author={Maimon, Gallil and Roth, Amit and Adi, Yossi},
+  booktitle={ICASSP 2025 - 2025 IEEE International Conference on Acoustics, Speech and Signal Processing (ICASSP)}, 
+  title={Salmon: A Suite for Acoustic Language Model Evaluation}, 
+  year={2025},
+  volume={},
+  number={},
+  pages={1-5},
+  keywords={Measurement;Codes;Publishing;Computational modeling;Pipelines;Benchmark testing;Signal processing;Acoustics;Background noise;Speech processing;Speech Language Models;Acoustic Modelling},
+  doi={10.1109/ICASSP49660.2025.10888561}}
+
 ```
