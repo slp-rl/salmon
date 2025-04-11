@@ -72,7 +72,6 @@ We provide here a short version of the leaderboard for a live sortable version s
 |    LAST 1.3B     | 65.0 |        64.5         |        68.5        |                56.0                |              61.0               |       62.5       |        53.5         |         53.0         | 
 |    [TASLM 1B (token)](https://arxiv.org/abs/2504.07053)      | 59.0 |        68.0         |        70.5        |                -                |              -              |       61.0       |        -         |         -         | 
 |    [TASLM 1B (embedding)](https://arxiv.org/abs/2504.07053)      | 57.5 |        67.0         |        75.5        |                -                |              -              |       50.0       |        -         |         -         | 
-
 | Human Evaluation | **<ins>97.2</ins>** |  **<ins>91.2</ins>**  |  **<ins>98.6</ins>**  |  **<ins>83.1</ins>**  |  **<ins>88.7</ins>** |  **<ins>94.4</ins>** |  **<ins>93.3</ins>** |  **<ins>95.7</ins>** | 
 
 ## Generate SALMon Dataset
