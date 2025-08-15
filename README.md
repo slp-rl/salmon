@@ -65,14 +65,16 @@ We provide here a short version of the leaderboard for a live sortable version s
 
 |      Method      | Sentiment Consistency | Speaker Consistency | Gender Consistency | Background Consistency (In-Domain) | Background Consistency (Random) | Room Consistency | Sentiment Alignment | Background Alignment |
 |:----------------:|:---------------------:|:-------------------:|:------------------:|:----------------------------------:|:-------------------------------:|:----------------:|:-------------------:|:--------------------:|
-|     SpiritLM 7B   |         54.5          |        69.5         |        67.0        |                53.5                |              55.5               |       54.5       |        48.0         |         51.5         | 
 |SpiritLM 7B (Expr.) |         73.5         |        81.0         |        85.0        |                55.0                |              64.0               |       55.5       |        52.0         |         59.5         |
 |     Twist 7B     |         61.5          |        71.0         |        70.0        |                55.0                |              60.5               |       62.0       |        51.5         |         54.5         | 
 |      pGSLM       |         40.5          |        83.0         |        88.5        |                57.0                |              66.0               |       53.5       |        55.5         |         53.5         | 
 |    LAST 1.3B     | 65.0 |        64.5         |        68.5        |                56.0                |              61.0               |       62.5       |        53.5         |         53.0         | 
-|    [TASLM 1B (token)](https://arxiv.org/abs/2504.07053)      | 59.0 |        68.0         |        70.5        |                -                |              -              |       61.0       |        -         |         -         | 
-|    [TASLM 1B (embedding)](https://arxiv.org/abs/2504.07053)      | 57.5 |        67.0         |        75.5        |                -                |              -              |       50.0       |        -         |         -         | 
+|    TASLM 1B (token)      | 59.0 |        68.0         |        70.5        |                -                |              -              |       61.0       |        -         |         -         | 
+|    TASLM 1B (embedding)      | 57.5 |        67.0         |        75.5        |                -                |              -              |       50.0       |        -         |         -         | 
+| Flow-SLM-270M    | 61.5 | 75.5 | 78.0 | 69.0 | 67.0 | 73.5 | 60.0 | 55.5 |
+| Flow-SLM-1B-ext  | 65.0 | 76.5 | 80.0 | 70.0 | 64.5 | 73.5 | 57.0 | 53.0 |
 | Human Evaluation | **<ins>97.2</ins>** |  **<ins>91.2</ins>**  |  **<ins>98.6</ins>**  |  **<ins>83.1</ins>**  |  **<ins>88.7</ins>** |  **<ins>94.4</ins>** |  **<ins>93.3</ins>** |  **<ins>95.7</ins>** | 
+
 
 ## Generate SALMon Dataset
 We provide the code and data to reproduce SALMon, or alternitavely create more samples for futher evaluation or training! 
